@@ -41,3 +41,17 @@ Downloads images into `../assets/images/_raw/`.
 
 - Instagram DM: https://ig.me/m/jaipurscloset
 - WhatsApp: configured via the `WHATSAPP_NUMBER` placeholder in `index.html` — search and replace once the number is provided.
+
+## Updating the WhatsApp Number
+
+When the WhatsApp number is finalized, search the repo for `WHATSAPP_NUMBER` and replace each occurrence with the international-format digits only (no `+`, no spaces, no dashes — e.g., `919876543210` for India +91 98765 43210).
+
+Files affected: `index.html` (button hrefs + JSON-LD `telephone` field).
+
+Use:
+```bash
+grep -rln WHATSAPP_NUMBER .
+# then replace each occurrence in index.html
+```
+
+Commit and push — auto-deploys via GitHub Actions.
