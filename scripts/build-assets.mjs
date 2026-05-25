@@ -38,13 +38,14 @@ function checkSize(filePath, budgetBytes, label) {
 // ---------------------------------------------------------------------------
 // 1. hero.webp — max-width 1600, quality 80, budget 200 KB
 // ---------------------------------------------------------------------------
-async function buildHero(quality = 80) {
+async function buildHero(quality = 75) {
   const dest = path.join(OUT_IMAGES, 'hero.webp');
-  await sharp(path.join(RAW, 'imgpsh_fullsize_anim_11_1.png'))
-    .resize(1600, null, { fit: 'inside', withoutEnlargement: true })
+  const src = path.join(RAW, 'hero-unsplash-jaipur.jpg');
+  await sharp(src)
+    .resize(2400, 1350, { fit: 'cover', position: 'center' })
     .webp({ quality })
     .toFile(dest);
-  const ok = checkSize(dest, 200 * 1024, 'hero.webp');
+  const ok = checkSize(dest, 500 * 1024, 'hero.webp');
   if (!ok && quality > 60) {
     console.log(`  Retrying hero.webp at quality ${quality - 5}`);
     return buildHero(quality - 5);
